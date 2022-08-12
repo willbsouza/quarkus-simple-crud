@@ -1,9 +1,5 @@
 package com.compass.exception;
 
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.undertow.servlet.spec.HttpServletRequestImpl;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -14,8 +10,6 @@ public class ResourceExceptionHandler implements ExceptionMapper<ObjectNotFoundE
 
     @Override
     public Response toResponse(ObjectNotFoundException exception) {
-
-
 
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());

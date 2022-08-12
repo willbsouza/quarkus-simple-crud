@@ -2,7 +2,6 @@ package com.compass.resources;
 
 import com.compass.domain.Customer;
 import com.compass.exception.ObjectNotFoundException;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -17,12 +16,10 @@ import java.net.URI;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Transactional
-@Slf4j
 public class PersonResource {
 
     @Inject
     private EntityManager em;
-
 
     @GET
     public Response findAll(){
@@ -64,6 +61,7 @@ public class PersonResource {
     public Response deleteById(@PathParam("id") Long id){
         Customer customer = em.find(Customer.class, id);
         if(customer != null){
+            em.remove(customer);
             return Response.noContent().build();
         } else {
             throw new ObjectNotFoundException("Person ID: " + id + " not found.");
